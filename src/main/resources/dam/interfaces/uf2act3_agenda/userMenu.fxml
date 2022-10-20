@@ -82,7 +82,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Delete" />
+                        <Button mnemonicParsing="false" text="Delete" onAction="#handleDeletePerson"/>
                      </children>
                   </HBox>
                </children>
