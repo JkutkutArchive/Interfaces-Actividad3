@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ public class MainApp extends Application {
     private ObservableList<Person> personData;
 
     // ********** UI **********
+    private Stage primaryStage;
     private BorderPane rootLayout;
     private AnchorPane userMenu;
 
@@ -47,6 +49,7 @@ public class MainApp extends Application {
     // ********** App Methods **********
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
         stage.setTitle(APP_NAME);
         loadLayouts();
         stage.setMinWidth(600);
@@ -85,5 +88,22 @@ public class MainApp extends Application {
     // ********** Getters **********
     public ObservableList<Person> getPersonData() {
         return personData;
+    }
+
+    // ********** UX Methods **********
+    private void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(primaryStage);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    public void warn(String title, String header, String msg) {
+        showAlert(Alert.AlertType.WARNING, title, header, msg);
+    }
+
+    public void error(String title, String header, String msg) {
+        showAlert(Alert.AlertType.ERROR, title, header, msg);
     }
 }

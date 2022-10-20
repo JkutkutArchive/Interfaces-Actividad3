@@ -69,6 +69,10 @@ public class UserMenuController {
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex < 0) {
+            mainApp.warn("No selection", "No person selected", "Please select a person in the table.");
+            return;
+        }
         personTable.getItems().remove(selectedIndex);
     }
 }
