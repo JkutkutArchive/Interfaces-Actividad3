@@ -15,16 +15,19 @@
 
 
 <AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+            prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dam.interfaces.uf2act3_agenda.controller.UserMenuController">
    <children>
       <SplitPane dividerPositions="0.5903010033444817" layoutX="229.0" layoutY="37.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView prefHeight="298.0" prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView prefHeight="298.0" prefWidth="275.0"
+                             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+                             fx:id="personTable">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="First Name" />
-                      <TableColumn prefWidth="75.0" text="Last Name" />
+                      <TableColumn prefWidth="75.0" text="First Name" fx:id="firstNameColumn"/>
+                      <TableColumn prefWidth="75.0" text="Last Name" fx:id="lastNameColumn"/>
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -54,17 +57,17 @@
                     </rowConstraints>
                      <children>
                         <Label text="First Name" />
-                        <Label text="..." GridPane.columnIndex="1" />
+                        <Label text="..." GridPane.columnIndex="1" fx:id="firstNameLabel"/>
                         <Label text="Last Name" GridPane.rowIndex="1" />
-                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="lastNameLabel" />
                         <Label text="Street" GridPane.rowIndex="2" />
-                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="streetLabel"/>
                         <Label text="City" GridPane.rowIndex="3" />
-                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="cityLabel"/>
                         <Label text="Postal Code" GridPane.rowIndex="4" />
-                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="postalCodeLabel"/>
                         <Label text="Birthday" GridPane.rowIndex="5" />
-                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="birthdayLabel"/>
                      </children>
                   </GridPane>
                   <HBox AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">

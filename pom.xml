@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>dam.interfaces.uf2act3_agenda/dam.interfaces.uf2act3_agenda.App
+                            <mainClass>dam.interfaces.uf2act3_agenda/dam.interfaces.uf2act3_agenda.MainApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
