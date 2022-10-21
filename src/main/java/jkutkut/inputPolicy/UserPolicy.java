@@ -4,12 +4,12 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class UserPolicy extends InputPolicy {
-    private static final int MIN_LENGTH = 3;
-    private static final int MAX_LENGTH = 20;
+    protected static final int MIN_LENGTH = 3;
+    protected static final int MAX_LENGTH = 20;
 
-    private static final Predicate<String> FT_NN = Objects::nonNull;
-    private static final Predicate<String> FT_MIN_L = (s) -> s.length() >= MIN_LENGTH;
-    private static final Predicate<String> FT_MAX_L = (s) -> s.length() <= MAX_LENGTH;
+    protected static final Predicate<String> FT_NN = Objects::nonNull;
+    protected static final Predicate<String> FT_MIN_L = (s) -> s.length() >= MIN_LENGTH;
+    protected static final Predicate<String> FT_MAX_L = (s) -> s.length() <= MAX_LENGTH;
 
     public UserPolicy() {
         super();

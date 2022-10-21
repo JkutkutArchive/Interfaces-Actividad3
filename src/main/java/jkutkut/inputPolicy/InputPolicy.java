@@ -160,8 +160,6 @@ public class InputPolicy {
         if (!str.matches(String.format("[%s]*", all)))
             errors += "Password can only contain the following chars: " + all + "\n";
 
-        if (errors.length() == 0)
-            return null;
         return errors;
     }
 
