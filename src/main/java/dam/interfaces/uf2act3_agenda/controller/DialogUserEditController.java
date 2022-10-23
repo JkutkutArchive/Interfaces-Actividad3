@@ -33,8 +33,7 @@ public class DialogUserEditController {
 
     // ********** Methods **********
     @FXML
-    private void initialize() {
-    }
+    private void initialize() {}
 
     @FXML
     private void handleOk() {
@@ -67,8 +66,12 @@ public class DialogUserEditController {
             txtfPostalCode.getText(),
             txtfBirthday.getText()
         );
-        // TODO add alert
-        return true;
+        if (errorMessage.length() == 0)
+            return true;
+        else {
+            error("Invalid Fields", "Please correct invalid fields", errorMessage);
+            return false;
+        }
     }
 
     // ********** Getters **********
@@ -91,4 +94,18 @@ public class DialogUserEditController {
         txtfBirthday.setText(DateUtil.format(person.getBirthday()));
         txtfBirthday.setPromptText("dd/mm/yyyy");
     }
+
+    // ********** UX Methods **********
+    private void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(dialogStage);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    public void error(String title, String header, String msg) {
+        showAlert(Alert.AlertType.ERROR, title, header, msg);
+    }
+
 }
