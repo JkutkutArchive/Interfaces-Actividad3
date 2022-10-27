@@ -72,12 +72,12 @@
                   </GridPane>
                   <HBox AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <children>
-                        <Button mnemonicParsing="false" text="New...">
+                        <Button mnemonicParsing="false" text="New..." onAction="#handleNewPerson">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Edit...">
+                        <Button mnemonicParsing="false" text="Edit..." onAction="#handleEditPerson">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
