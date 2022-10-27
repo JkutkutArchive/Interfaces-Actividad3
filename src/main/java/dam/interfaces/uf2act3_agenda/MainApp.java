@@ -17,7 +17,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main class of the application.
+ *
+ * @author jkutkut
+ */
 public class MainApp extends Application {
+    // ********** Constants **********
     private static final String APP_NAME = "Contacts";
     private static final String APP_XML = "view/app.fxml";
     private static final String USER_MENU_XML = "view/userMenu.fxml";
@@ -35,6 +41,11 @@ public class MainApp extends Application {
         initComponents();
     }
 
+    /**
+     * Initializes components needed by the application.
+     *
+     * Note: The debug logic will be removed in future versions when persistence is implemented.
+     */
     private void initComponents() {
         personData = FXCollections.observableArrayList();
         // TODO DEBUG
@@ -50,6 +61,12 @@ public class MainApp extends Application {
     }
 
     // ********** App Methods **********
+
+    /**
+     * Starts the window of the application.
+     * @param stage The stage to be shown.
+     * @throws IOException If the FXML file cannot be loaded.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
@@ -68,6 +85,11 @@ public class MainApp extends Application {
 
 
     // ********** Menu logic **********
+
+    /**
+     * Loads all the layouts needed for the basic application.
+     * @throws IOException If the FXML file cannot be loaded.
+     */
     private void loadLayouts() throws IOException {
         // App body
         FXMLLoader appLoader = new FXMLLoader(MainApp.class.getResource(APP_XML));
@@ -76,16 +98,10 @@ public class MainApp extends Application {
         // User menu
         FXMLLoader userMenuLoader = new FXMLLoader(MainApp.class.getResource(USER_MENU_XML));
         userMenu = userMenuLoader.load();
-//        ((UserMenuController) userMenuLoader.getController()).setMainApp(this);
         UserMenuController controller = userMenuLoader.getController();
         controller.setMainApp(this);
 
         // Default menu
-        openUserMenu();
-    }
-
-    private void openUserMenu() {
-        // TODO Overkill?
         rootLayout.setCenter(userMenu);
     }
 
