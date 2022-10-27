@@ -19,9 +19,9 @@ import java.io.IOException;
 
 public class MainApp extends Application {
     private static final String APP_NAME = "Contacts";
-    private static final String APP_XML = "app.fxml";
-    private static final String USER_MENU_XML = "userMenu.fxml";
-    private static final String MENU_XML = "dialog/userEdit.fxml";
+    private static final String APP_XML = "view/app.fxml";
+    private static final String USER_MENU_XML = "view/userMenu.fxml";
+    private static final String MENU_XML = "view/dialog/userEdit.fxml";
 
     // ********** Attributes **********
     private ObservableList<Person> personData;
