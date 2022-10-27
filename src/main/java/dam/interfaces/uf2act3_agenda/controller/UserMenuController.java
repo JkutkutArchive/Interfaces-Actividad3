@@ -55,7 +55,7 @@ public class UserMenuController {
     // ********** UI Methods **********
     private void updateUser(Person p) {
         if (p == null) {
-            p = new Person("...", "...");
+            p = new Person();
         }
         firstNameLabel.setText(p.getFirstName());
         lastNameLabel.setText(p.getLastName());
@@ -69,7 +69,7 @@ public class UserMenuController {
 
     @FXML
     private void handleNewPerson() {
-        Person tempPerson = new Person("", ""); // TODO allow empty fields
+        Person tempPerson = new Person();
         boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
         if (okClicked)
             mainApp.getPersonData().add(tempPerson);

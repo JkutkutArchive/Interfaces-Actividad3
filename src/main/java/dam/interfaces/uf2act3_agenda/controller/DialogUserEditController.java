@@ -35,12 +35,6 @@ public class DialogUserEditController {
     @FXML
     private TextField txtfBirthday;
 
-//    @FXML
-//    private Button btnOk;
-//
-//    @FXML
-//    private Button btnCancel;
-
     // ********** UI **********
     private Stage dialogStage;
     private Person person;

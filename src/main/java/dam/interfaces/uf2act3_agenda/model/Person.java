@@ -18,15 +18,23 @@ public class Person {
     private final StringProperty city;
     private final ObjectProperty<LocalDate> birthday;
 
-    public Person(String firstName, String lastName) {
+    public Person() {
+        this.firstName = new SimpleStringProperty("");
+        this.lastName = new SimpleStringProperty("");
+        this.street = new SimpleStringProperty("");
+        this.postalCode = new SimpleIntegerProperty(0);
+        this.city = new SimpleStringProperty("");
+        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+    }
+
+    public Person(String firstName, String lastName, String street, int postalCode, String city,
+                  int year, int month, int day) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-
-        // TODO DEBUG
-        this.street = new SimpleStringProperty("some street");
-        this.postalCode = new SimpleIntegerProperty(1234);
-        this.city = new SimpleStringProperty("some city");
-        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        this.street = new SimpleStringProperty(street);
+        this.postalCode = new SimpleIntegerProperty(postalCode);
+        this.city = new SimpleStringProperty(city);
+        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(year, month, day));
     }
 
     // ********** GETTERS **********

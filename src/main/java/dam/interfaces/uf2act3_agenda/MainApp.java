@@ -38,15 +38,15 @@ public class MainApp extends Application {
     private void initComponents() {
         personData = FXCollections.observableArrayList();
         // TODO DEBUG
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
+        personData.add(new Person("Hans", "Muster", "Musterstrasse 1", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Ruth", "Mueller", "Musterstrasse 2", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Heinz", "Kurz", "Musterstrasse 3", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Cornelia", "Meier", "Musterstrasse 4", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Werner", "Meyer", "Musterstrasse 5", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Lydia", "Kunz", "Musterstrasse 6", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Anna", "Best", "Musterstrasse 7", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Stefan", "Meier", "Musterstrasse 8", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Martin", "Mueller", "Musterstrasse 9", 1234, "Musterstadt", 2000, 1, 1));
     }
 
     // ********** App Methods **********
