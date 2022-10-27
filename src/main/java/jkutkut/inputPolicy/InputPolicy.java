@@ -157,7 +157,7 @@ public class InputPolicy {
         String all = "";
         for (i = 0; i < containsAtLeast.size(); i++)
             all += containsAtLeast.get(i);
-        if (!str.matches(String.format("[%s]*", all)))
+        if (all.length() > 0 && !str.matches(String.format("[%s]*", all)))
             errors += "Password can only contain the following chars: " + all + "\n";
 
         return errors;
