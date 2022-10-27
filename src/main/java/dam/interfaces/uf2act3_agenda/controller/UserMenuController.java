@@ -66,6 +66,31 @@ public class UserMenuController {
     }
 
     // ********** UX Methods **********
+
+    @FXML
+    private void handleNewPerson() {
+        Person tempPerson = new Person("", ""); // TODO allow empty fields
+        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        if (okClicked)
+            mainApp.getPersonData().add(tempPerson);
+    }
+
+    @FXML
+    private void handleEditPerson() {
+        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+        if (selectedPerson == null) {
+            mainApp.warn(
+                "No Person Selected",
+                "Please select a person in the table.",
+                ""
+            );
+            return;
+        }
+        boolean ok = mainApp.showPersonEditDialog(selectedPerson);
+        if (ok)
+            updateUser(selectedPerson);
+    }
+
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
