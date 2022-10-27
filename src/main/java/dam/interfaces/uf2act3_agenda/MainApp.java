@@ -1,5 +1,6 @@
 package dam.interfaces.uf2act3_agenda;
 
+import dam.interfaces.uf2act3_agenda.controller.DialogUserEditController;
 import dam.interfaces.uf2act3_agenda.controller.UserMenuController;
 import dam.interfaces.uf2act3_agenda.model.Person;
 
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +21,7 @@ public class MainApp extends Application {
     private static final String APP_NAME = "Contacts";
     private static final String APP_XML = "app.fxml";
     private static final String USER_MENU_XML = "userMenu.fxml";
+    private static final String MENU_XML = "dialog/userEdit.fxml";
 
     // ********** Attributes **********
     private ObservableList<Person> personData;
@@ -51,6 +54,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         stage.setTitle(APP_NAME);
+        setUserAgentStylesheet(STYLESHEET_CASPIAN);
         loadLayouts();
         stage.setMinWidth(600);
         stage.setMinHeight(500);
@@ -91,8 +95,33 @@ public class MainApp extends Application {
     }
 
     // ********** UX Methods **********
+    public boolean showPersonEditDialog(Person person) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    MainApp.class.getResource(MENU_XML)
+            );
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(loader.load());
+            dialogStage.setScene(scene);
+
+            DialogUserEditController userEdit = loader.getController();
+            userEdit.setDialogStage(dialogStage);
+            userEdit.setPerson(person);
+            userEdit.showAndWait();
+            return userEdit.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(type);
         alert.initOwner(primaryStage);
         alert.setTitle(title);
         alert.setHeaderText(header);

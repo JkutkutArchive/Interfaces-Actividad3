@@ -10,13 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="250.0" prefWidth="450.0"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="dam.interfaces.uf2act3_agenda.controller.DialogUserEditController">
+<AnchorPane prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam.interfaces.uf2act3_agenda.controller.DialogUserEditController">
    <children>
-      <GridPane layoutX="53.0" layoutY="76.0"
-                AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-                AnchorPane.topAnchor="10.0">
+      <GridPane layoutX="53.0" layoutY="76.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="100.0" prefWidth="100" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="150.0" prefWidth="400" />
@@ -31,7 +27,7 @@
         </rowConstraints>
          <children>
             <Label text="First name" />
-            <Label text="Last naame" GridPane.rowIndex="1" />
+            <Label text="Last name" GridPane.rowIndex="1" />
             <Label text="Street" GridPane.rowIndex="2" />
             <Label text="City" GridPane.rowIndex="3" />
             <Label text="Postal code" GridPane.rowIndex="4" />
@@ -44,15 +40,14 @@
             <TextField fx:id="txtfBirthday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <HBox layoutX="132.0" layoutY="262.0"
-            AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <HBox layoutX="132.0" layoutY="262.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <Button fx:id="btnOk" mnemonicParsing="false" prefWidth="100.0" text="Ok" onAction="#handleOk">
+            <Button fx:id="btnOk" mnemonicParsing="false" onAction="#handleOk" prefWidth="100.0" text="Ok">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnCancel" mnemonicParsing="false" prefWidth="100.0" text="Cancel" onAction="#handleCancel">
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#handleCancel" prefWidth="100.0" text="Cancel">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

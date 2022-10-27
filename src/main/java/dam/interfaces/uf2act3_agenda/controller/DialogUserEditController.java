@@ -1,13 +1,22 @@
 package dam.interfaces.uf2act3_agenda.controller;
 
+import dam.interfaces.uf2act3_agenda.MainApp;
 import dam.interfaces.uf2act3_agenda.model.Person;
 import dam.interfaces.uf2act3_agenda.util.DateUtil;
 import dam.interfaces.uf2act3_agenda.util.PersonPolicy;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class DialogUserEditController {
+
     @FXML
     private TextField txtfFirstName;
 
@@ -25,6 +34,12 @@ public class DialogUserEditController {
 
     @FXML
     private TextField txtfBirthday;
+
+//    @FXML
+//    private Button btnOk;
+//
+//    @FXML
+//    private Button btnCancel;
 
     // ********** UI **********
     private Stage dialogStage;
@@ -80,10 +95,6 @@ public class DialogUserEditController {
     }
 
     // ********** Setters **********
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage; // TODO move to constructor?
-    }
-
     public void setPerson(Person person) {
         this.person = person;
         txtfFirstName.setText(person.getFirstName());
@@ -96,8 +107,12 @@ public class DialogUserEditController {
     }
 
     // ********** UX Methods **********
+    public void showAndWait() {
+        dialogStage.showAndWait();
+    }
+
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(type);
         alert.initOwner(dialogStage);
         alert.setTitle(title);
         alert.setHeaderText(header);
@@ -108,4 +123,7 @@ public class DialogUserEditController {
         showAlert(Alert.AlertType.ERROR, title, header, msg);
     }
 
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
 }
