@@ -38,15 +38,15 @@ public class MainApp extends Application {
     private void initComponents() {
         personData = FXCollections.observableArrayList();
         // TODO DEBUG
-        personData.add(new Person("Hans", "Muster", "Musterstrasse 1", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Ruth", "Mueller", "Musterstrasse 2", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Heinz", "Kurz", "Musterstrasse 3", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Cornelia", "Meier", "Musterstrasse 4", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Werner", "Meyer", "Musterstrasse 5", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Lydia", "Kunz", "Musterstrasse 6", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Anna", "Best", "Musterstrasse 7", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Stefan", "Meier", "Musterstrasse 8", 1234, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Martin", "Mueller", "Musterstrasse 9", 1234, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Hans", "Muster", "Musterstrasse 1", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Ruth", "Mueller", "Musterstrasse 2", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Heinz", "Kurz", "Musterstrasse 3", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Cornelia", "Meier", "Musterstrasse 4", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Werner", "Meyer", "Musterstrasse 5", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Lydia", "Kunz", "Musterstrasse 6", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Anna", "Best", "Musterstrasse 7", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Stefan", "Meier", "Musterstrasse 8", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Martin", "Mueller", "Musterstrasse 9", 12345, "Musterstadt", 2000, 1, 1));
     }
 
     // ********** App Methods **********

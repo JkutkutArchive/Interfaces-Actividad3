@@ -3,6 +3,8 @@ package dam.interfaces.uf2act3_agenda.util;
 import jkutkut.inputPolicy.BirthdayPolicy;
 import jkutkut.inputPolicy.UserPolicy;
 
+import java.util.ArrayList;
+
 public class PersonPolicy {
 
     protected static class NamePolicy extends UserPolicy {
@@ -31,7 +33,7 @@ public class PersonPolicy {
         }
     }
 
-    private class StreetPolicy extends NamePolicy {
+    private static class StreetPolicy extends NamePolicy {
         protected static final String POLICY_NAME = "Street";
 
         protected String getPolicyName() {
@@ -39,7 +41,7 @@ public class PersonPolicy {
         }
     }
 
-    private class CityPolicy extends NamePolicy {
+    private static class CityPolicy extends NamePolicy {
         protected static final String POLICY_NAME = "City";
 
         protected String getPolicyName() {
@@ -47,11 +49,11 @@ public class PersonPolicy {
         }
     }
 
-    private NamePolicy namePolicy;
-    private BirthdayPolicy birthdayPolicy;
-    private LastNamePolicy lastNamePolicy;
-    private StreetPolicy streetPolicy;
-    private CityPolicy cityPolicy;
+    private final NamePolicy namePolicy;
+    private final BirthdayPolicy birthdayPolicy;
+    private final LastNamePolicy lastNamePolicy;
+    private final StreetPolicy streetPolicy;
+    private final CityPolicy cityPolicy;
 
 
     public PersonPolicy() {
@@ -63,26 +65,24 @@ public class PersonPolicy {
     }
 
     public String test(String fname, String lname, String street, String city, String sPostalCode, String birthday) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(namePolicy.testAll(fname) + "\n");
-        sb.append(lastNamePolicy.testAll(lname) + "\n");
+        ArrayList<String> errors = new ArrayList<>();
+
+        errors.add(namePolicy.testAll(fname));
+        errors.add(lastNamePolicy.testAll(lname));
         try {
             int postalCode = Integer.parseInt(sPostalCode);
             if (postalCode < 10000) {
-                sb.append("Postal code must be at least 5 digits long\n");
+                errors.add("Postal code must be at least 5 digits long\n");
             }
             else if (postalCode > 99999) {
-                sb.append("Postal code must be at most 5 digits long\n");
+                errors.add("Postal code must be at most 5 digits long\n");
             }
         } catch (NumberFormatException e) {
-            sb.append("Postal code must be a number");
+            errors.add("Postal code must be a number");
         }
-        sb.append(streetPolicy.testAll(street) + "\n");
-        sb.append(cityPolicy.testAll(city) + "\n");
-        sb.append(birthdayPolicy.testAll(birthday) + "\n");
-        String result = sb.toString();
-        if (result.trim().isEmpty())
-            return "";
-        return result;
+        errors.add(streetPolicy.testAll(street));
+        errors.add(cityPolicy.testAll(city));
+        errors.add(birthdayPolicy.testAll(birthday));
+        return String.join("\n", errors).trim();
     }
 }
