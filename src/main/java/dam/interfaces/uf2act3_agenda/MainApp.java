@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -26,6 +27,7 @@ import java.io.IOException;
 public class MainApp extends Application {
     // ********** Constants **********
     private static final String APP_NAME = "Contacts";
+    private static final String LOGO = "file:src/main/resources/dam/interfaces/uf2act3_agenda/images/logo.png";
     private static final String APP_XML = "view/app.fxml";
     private static final String USER_MENU_XML = "view/userMenu.fxml";
     private static final String MENU_XML = "view/dialog/userEdit.fxml";
@@ -75,6 +77,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         stage.setTitle(APP_NAME);
+        primaryStage.getIcons().add(new Image(LOGO));
         loadLayouts();
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
