@@ -4,11 +4,17 @@ import dam.interfaces.uf2act3_agenda.MainApp;
 import dam.interfaces.uf2act3_agenda.model.Person;
 import dam.interfaces.uf2act3_agenda.util.DateUtil;
 import dam.interfaces.uf2act3_agenda.util.PersonPolicy;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Dialog to edit details of a given person.
+ *
+ * @author jkutkut
+ */
 public class DialogUserEditController {
 
     @FXML
@@ -38,6 +44,9 @@ public class DialogUserEditController {
     @FXML
     private void initialize() {}
 
+    /**
+     * Handles the OK button.
+     */
     @FXML
     private void handleOk() {
         if (isInputValid()) {
@@ -53,12 +62,20 @@ public class DialogUserEditController {
         }
     }
 
+    /**
+     * Handles the Cancel button.
+     */
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
 
     // ********** Data Validation **********
+
+    /**
+     * Validates if the current values in the dialog are valid.
+     * @return The result of the validation.
+     */
     private boolean isInputValid() {
         PersonPolicy policy = new PersonPolicy();
         String errorMessage = policy.test(
@@ -94,16 +111,26 @@ public class DialogUserEditController {
         txtfBirthday.setPromptText("dd/mm/yyyy");
     }
 
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
     // ********** UX Methods **********
+    /**
+     * Holds the execution until the dialog is closed.
+     */
     public void showAndWait() {
         dialogStage.showAndWait();
     }
 
+    /**
+     * Shows an error message.
+     *
+     * @param title The title of the error message.
+     * @param header The header of the error message.
+     * @param msg The message of the error message.
+     */
     public void error(String title, String header, String msg) {
         MainApp.showAlert(dialogStage, Alert.AlertType.ERROR, title, header, msg);
-    }
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
     }
 }
