@@ -1,5 +1,10 @@
 package jkutkut.exception;
 
+/**
+ * Exception to be thrown when the data is invalid.
+ *
+ * @author jkutkut
+ */
 public class InvalidDataException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

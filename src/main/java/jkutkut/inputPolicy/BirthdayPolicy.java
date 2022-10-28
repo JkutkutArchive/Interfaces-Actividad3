@@ -1,49 +1,20 @@
 package jkutkut.inputPolicy;
 
-import java.util.Objects;
-import java.util.function.BiFunction;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
-public class BirthdayPolicy extends InputPolicy {
-    protected static final int DAY_IDX = 0;
-    protected static final int MONTH_IDX = 1;
-    protected static final int YEAR_IDX = 2;
+/**
+ * Policy to validate a person.
+ *
+ * @author jkutkut
+ */
+public class BirthdayPolicy extends DatePolicy {
 
-    // Tools
+    private static final String POLICY_NAME = "Birthday";
+    private static final int MAX_AGE = 150;
 
-    protected static final BiFunction<Integer, Integer, Integer> daysOfMonth = (month, year) -> {
-        if (month == 2) {
-            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
-                return 29;
-            return 28;
-        }
-        else if (month == 4 || month == 6 || month == 9 || month == 11)
-            return 30;
-        return 31;
-    };
-
-    // Tests
-
-    protected static final Predicate<String> validDateFormat = d -> {
-        if (d == null) return false;
-        return d.matches("\\d{1,2}/\\d{1,2}/\\d{4}");
-    };
-
-    protected static final Predicate<String> validDateIntegers = d -> {
-        if (d == null) return false;
-        String[] date = d.split("/");
-        if (date.length != 3) return false;
-        try {
-            Integer.parseInt(date[DAY_IDX]);
-            Integer.parseInt(date[MONTH_IDX]);
-            Integer.parseInt(date[YEAR_IDX]);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    };
-
-    protected static final Predicate<String> validDate = d -> {
+    // ******** Tests ********
+    protected static final Predicate<String> notFuture = d -> {
         if (d == null) return false;
         String[] date = d.split("/");
         if (date.length != 3) return false;
@@ -52,23 +23,54 @@ public class BirthdayPolicy extends InputPolicy {
             int month = Integer.parseInt(date[MONTH_IDX]);
             int year = Integer.parseInt(date[YEAR_IDX]);
 
-            if (month < 1 || month > 12) return false;
-            if (day < 1 || day > daysOfMonth.apply(month, year)) return false;
+            // Current date
+            LocalDate now = LocalDate.now();
+            int nowDay = now.getDayOfMonth();
+            int nowMonth = now.getMonthValue();
+            int nowYear = now.getYear();
+
+            // Check if the date is in the future
+            if (year > nowYear) return false;
+            if (year < nowYear) return true;
+            if (month > nowMonth) return false;
+            if (month < nowMonth) return true;
+            return day <= nowDay;
         } catch (NumberFormatException e) {
             return false;
         }
-        return true;
     };
 
-    public BirthdayPolicy() {
-        super();
-        addTests();
+    protected static final Predicate<String> notTooOld = d -> {
+        if (d == null) return false;
+        String[] date = d.split("/");
+        if (date.length != 3) return false;
+        try {
+            int year = Integer.parseInt(date[YEAR_IDX]);
+
+            // Current date
+            LocalDate now = LocalDate.now();
+            int nowYear = now.getYear();
+
+            // Check if the date is too old
+            return nowYear - year <= MAX_AGE;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
+
+    @Override
+    protected void addTests() {
+        super.addTests();
+        addTest(notFuture, String.format("%s cannot be in the future", getPolicyName()));
+        addTest(notTooOld, String.format("%s cannot be older than %d years", getPolicyName(), getMaxAge()));
     }
 
-    private void addTests() {
-        addTest(Objects::nonNull, "Date cannot be null");
-        addTest(validDateFormat, "Date must be in the format dd/mm/yyyy (regex not met)");
-        addTest(validDateIntegers, "Date must be in the format dd/mm/yyyy (values not correct)");
-        addTest(validDate, "Date is not valid.");
+    // ******** GETTERS ********
+    protected String getPolicyName() {
+        return POLICY_NAME;
+    }
+
+    protected int getMaxAge() {
+        return MAX_AGE;
     }
 }
