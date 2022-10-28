@@ -29,6 +29,9 @@ public class MainApp extends Application {
     private static final String USER_MENU_XML = "view/userMenu.fxml";
     private static final String MENU_XML = "view/dialog/userEdit.fxml";
 
+    private static final int MIN_WIDTH = 600;
+    private static final int MIN_HEIGHT = 500;
+
     // ********** Attributes **********
     private ObservableList<Person> personData;
 
@@ -73,8 +76,8 @@ public class MainApp extends Application {
         stage.setTitle(APP_NAME);
         setUserAgentStylesheet(STYLESHEET_CASPIAN);
         loadLayouts();
-        stage.setMinWidth(600);
-        stage.setMinHeight(500);
+        stage.setMinWidth(MIN_WIDTH);
+        stage.setMinHeight(MIN_HEIGHT);
         stage.setScene(new Scene(rootLayout));
         stage.show();
     }
@@ -111,6 +114,12 @@ public class MainApp extends Application {
     }
 
     // ********** UX Methods **********
+
+    /**
+     * Opens a dialog window to edit (or create) a person.
+     * @param person The person to be edited (or created if empty).
+     * @return True if the form was submitted successfully. False otherwise.
+     */
     public boolean showPersonEditDialog(Person person) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -136,6 +145,13 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Standard method to show a message dialog to the user.
+     * @param type The type of the dialog.
+     * @param title The title of the dialog.
+     * @param header The header of the dialog.
+     * @param content The content of the dialog.
+     */
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
         Alert alert = new Alert(type);
         alert.initOwner(primaryStage);
@@ -144,10 +160,23 @@ public class MainApp extends Application {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    /**
+     * Show an error mesaage to the user.
+     * @param title The title of the dialog.
+     * @param header The header of the dialog.
+     * @param msg The content of the dialog.
+     */
     public void warn(String title, String header, String msg) {
         showAlert(Alert.AlertType.WARNING, title, header, msg);
     }
 
+    /**
+     * Show an information mesaage to the user.
+     * @param title The title of the dialog.
+     * @param header The header of the dialog.
+     * @param msg The content of the dialog.
+     */
     public void error(String title, String header, String msg) {
         showAlert(Alert.AlertType.ERROR, title, header, msg);
     }
