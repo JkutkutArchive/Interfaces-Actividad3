@@ -30,7 +30,7 @@ public class MainApp extends Application {
     private static final String USER_MENU_XML = "view/userMenu.fxml";
     private static final String MENU_XML = "view/dialog/userEdit.fxml";
 
-    private static final int MIN_WIDTH = 600;
+    private static final int MIN_WIDTH = 800;
     private static final int MIN_HEIGHT = 500;
 
     // ********** Attributes **********
@@ -75,7 +75,6 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         stage.setTitle(APP_NAME);
-        setUserAgentStylesheet(STYLESHEET_CASPIAN);
         loadLayouts();
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
