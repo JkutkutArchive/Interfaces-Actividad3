@@ -3,12 +3,19 @@ package dam.interfaces.uf2act3_agenda.controller;
 import dam.interfaces.uf2act3_agenda.MainApp;
 import dam.interfaces.uf2act3_agenda.model.Person;
 import dam.interfaces.uf2act3_agenda.util.DateUtil;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+/**
+ * Controller for the user menu view.
+ *
+ * @author jkutkut
+ */
 public class UserMenuController {
+    // ********** UI **********
     @FXML
     private TableView<Person> personTable;
     @FXML
@@ -29,34 +36,58 @@ public class UserMenuController {
     @FXML
     private Label birthdayLabel;
 
-    // Reference to the main application.
+    // ********** Attributes **********
+    /**
+     * Reference to the main application.
+     */
     private MainApp mainApp;
 
     public UserMenuController() {
     }
 
+    /**
+     * Initializes the controller class.
+     *
+     * Note: This method is automatically called after the fxml file has been loaded.
+     */
     @FXML
     private void initialize() {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 
-        updateUser(null);
-
         personTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> updateUser(newValue)
         );
+
+        updateUser(null);
     }
 
+    /**
+     * This method allows to have a reference to the main application.
+     *
+     * Note: Can not be done in the constructor because it will be called before the fxml file is loaded.
+     * @param mainApp Reference to the main application.
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         personTable.setItems(mainApp.getPersonData());
     }
 
     // ********** UI Methods **********
+
+    /**
+     * Updates the user information in the UI.
+     *
+     * Note: If the user is not given (null), the data fields are hidden.
+     * @param p The user to show.
+     */
     private void updateUser(Person p) {
         if (p == null) {
-            p = new Person();
+            firstNameLabel.getParent().setVisible(false);
+            return;
         }
+        firstNameLabel.getParent().setVisible(true);
+
         firstNameLabel.setText(p.getFirstName());
         lastNameLabel.setText(p.getLastName());
         streetLabel.setText(p.getStreet());
@@ -67,6 +98,9 @@ public class UserMenuController {
 
     // ********** UX Methods **********
 
+    /**
+     * Called when the new button is clicked.
+     */
     @FXML
     private void handleNewPerson() {
         Person tempPerson = new Person();
@@ -75,6 +109,9 @@ public class UserMenuController {
             mainApp.getPersonData().add(tempPerson);
     }
 
+    /**
+     * Called when the edit button is clicked.
+     */
     @FXML
     private void handleEditPerson() {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
@@ -91,11 +128,14 @@ public class UserMenuController {
             updateUser(selectedPerson);
     }
 
+    /**
+     * Called when the delete button is clicked.
+     */
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex < 0) {
-            mainApp.warn("No selection", "No person selected", "Please select a person in the table.");
+            mainApp.error("No selection", "No person selected", "Please select a person in the table.");
             return;
         }
         personTable.getItems().remove(selectedIndex);
