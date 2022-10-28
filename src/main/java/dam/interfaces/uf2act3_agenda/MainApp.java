@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 
@@ -147,18 +148,31 @@ public class MainApp extends Application {
 
     /**
      * Standard method to show a message dialog to the user.
+     *
+     * @param window The window to be shown on top of.
+     * @param type The type of the dialog.
+     * @param title The title of the dialog.
+     * @param header The header of the dialog.
+     * @param msg The content of the dialog.
+     */
+    public static void showAlert(Window window, Alert.AlertType type, String title, String header, String msg) {
+        Alert alert = new Alert(type);
+        alert.initOwner(window);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
+    /**
+     * Standard method to show a message dialog to the user.
      * @param type The type of the dialog.
      * @param title The title of the dialog.
      * @param header The header of the dialog.
      * @param content The content of the dialog.
      */
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
-        Alert alert = new Alert(type);
-        alert.initOwner(primaryStage);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
+        showAlert(primaryStage, type, title, header, content);
     }
 
     /**

@@ -5,15 +5,9 @@ import dam.interfaces.uf2act3_agenda.model.Person;
 import dam.interfaces.uf2act3_agenda.util.DateUtil;
 import dam.interfaces.uf2act3_agenda.util.PersonPolicy;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class DialogUserEditController {
 
@@ -105,16 +99,8 @@ public class DialogUserEditController {
         dialogStage.showAndWait();
     }
 
-    private void showAlert(Alert.AlertType type, String title, String header, String content) {
-        Alert alert = new Alert(type);
-        alert.initOwner(dialogStage);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
     public void error(String title, String header, String msg) {
-        showAlert(Alert.AlertType.ERROR, title, header, msg);
+        MainApp.showAlert(dialogStage, Alert.AlertType.ERROR, title, header, msg);
     }
 
     public void setDialogStage(Stage dialogStage) {
