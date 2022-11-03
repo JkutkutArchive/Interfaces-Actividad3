@@ -17,7 +17,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 /**
  * Main class of the application.
@@ -195,5 +197,27 @@ public class MainApp extends Application {
      */
     public void error(String title, String header, String msg) {
         showAlert(Alert.AlertType.ERROR, title, header, msg);
+    }
+
+    // ********** Preferences **********
+    public File getPersonFilePath() { // TODO integrate with the logic
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null) {
+            return new File(filePath);
+        } else {
+            return null;
+        }
+    }
+
+    public void setPersonFilePath(File file) { // TODO integrate with the logic
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        if (file != null) {
+            prefs.put("filePath", file.getPath());
+            primaryStage.setTitle("AddressApp - " + file.getName());
+        } else {
+            prefs.remove("filePath");
+            primaryStage.setTitle("AddressApp");
+        }
     }
 }

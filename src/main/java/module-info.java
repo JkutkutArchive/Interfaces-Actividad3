@@ -1,6 +1,7 @@
 module dam.interfaces.uf2act3_agenda {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.prefs;
 
 
     opens dam.interfaces.uf2act3_agenda to javafx.fxml;
