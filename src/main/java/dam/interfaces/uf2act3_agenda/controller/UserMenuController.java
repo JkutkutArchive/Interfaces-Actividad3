@@ -138,6 +138,13 @@ public class UserMenuController {
             mainApp.error("No selection", "No person selected", "Please select a person in the table.");
             return;
         }
+        boolean ok = mainApp.confirm(
+            "Delete Person",
+            "Are you sure you want to delete this person?",
+            "This action can not be undone."
+        );
+        if (!ok)
+            return;
         personTable.getItems().remove(selectedIndex);
     }
 }
