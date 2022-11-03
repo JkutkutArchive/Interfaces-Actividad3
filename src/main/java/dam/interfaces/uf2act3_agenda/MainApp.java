@@ -1,6 +1,7 @@
 package dam.interfaces.uf2act3_agenda;
 
 import dam.interfaces.uf2act3_agenda.controller.DialogUserEditController;
+import dam.interfaces.uf2act3_agenda.controller.RootController;
 import dam.interfaces.uf2act3_agenda.controller.UserMenuController;
 import dam.interfaces.uf2act3_agenda.model.Person;
 
@@ -102,6 +103,8 @@ public class MainApp extends Application {
         // App body
         FXMLLoader appLoader = new FXMLLoader(MainApp.class.getResource(APP_XML));
         rootLayout = appLoader.load();
+        RootController appController = appLoader.getController();
+        appController.setMainApp(this);
 
         // User menu
         FXMLLoader userMenuLoader = new FXMLLoader(MainApp.class.getResource(USER_MENU_XML));
@@ -114,6 +117,10 @@ public class MainApp extends Application {
     }
 
     // ********** Getters **********
+    public Window getPrimaryStage() {
+        return primaryStage;
+    }
+
     public ObservableList<Person> getPersonData() {
         return personData;
     }
@@ -200,7 +207,7 @@ public class MainApp extends Application {
     }
 
     // ********** Preferences **********
-    public File getPersonFilePath() { // TODO integrate with the logic
+    public File getPersonFilePath() {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         String filePath = prefs.get("filePath", null);
         if (filePath != null) {
@@ -219,5 +226,25 @@ public class MainApp extends Application {
             prefs.remove("filePath");
             primaryStage.setTitle("AddressApp");
         }
+    }
+
+    // ********** File IO **********
+    public void loadPeople(File f) {
+        // TODO remove debug values from initcomponents
+        // TODO read file
+        // TODO open last session on init?
+        personData.add(new Person("Hans", "Muster", "Musterstrasse 1", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Ruth", "Mueller", "Musterstrasse 2", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Heinz", "Kurz", "Musterstrasse 3", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Cornelia", "Meier", "Musterstrasse 4", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Werner", "Meyer", "Musterstrasse 5", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Lydia", "Kunz", "Musterstrasse 6", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Anna", "Best", "Musterstrasse 7", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Stefan", "Meier", "Musterstrasse 8", 12345, "Musterstadt", 2000, 1, 1));
+        personData.add(new Person("Martin", "Mueller", "Musterstrasse 9", 12345, "Musterstadt", 2000, 1, 1));
+    }
+
+    public void savePeople(File f) {
+        // TODO write file
     }
 }
