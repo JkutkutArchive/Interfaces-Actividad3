@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +21,7 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.prefs.Preferences;
 
 /**
@@ -161,18 +163,19 @@ public class MainApp extends Application {
      * Standard method to show a message dialog to the user.
      *
      * @param window The window to be shown on top of.
-     * @param type The type of the dialog.
-     * @param title The title of the dialog.
+     * @param type   The type of the dialog.
+     * @param title  The title of the dialog.
      * @param header The header of the dialog.
-     * @param msg The content of the dialog.
+     * @param msg    The content of the dialog.
+     * @return The button pressed by the user.
      */
-    public static void showAlert(Window window, Alert.AlertType type, String title, String header, String msg) {
+    public static Optional<ButtonType> showAlert(Window window, Alert.AlertType type, String title, String header, String msg) {
         Alert alert = new Alert(type);
         alert.initOwner(window);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(msg);
-        alert.showAndWait();
+        return alert.showAndWait();
     }
 
     /**
@@ -204,6 +207,18 @@ public class MainApp extends Application {
      */
     public void error(String title, String header, String msg) {
         showAlert(Alert.AlertType.ERROR, title, header, msg);
+    }
+
+    /**
+     * Confirm something with the user.
+     * @param title The title of the dialog.
+     * @param header The header of the dialog.
+     * @param msg The content of the dialog.
+     * @return True if the user confirmed. False otherwise.
+     */
+    public boolean confirm(String title, String header, String msg) {
+        Optional<ButtonType> result = showAlert(primaryStage, Alert.AlertType.CONFIRMATION, title, header, msg);
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 
     // ********** Preferences **********
