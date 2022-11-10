@@ -82,7 +82,9 @@ public class RootController {
 
     @FXML
     private void handleExit() {
-        System.exit(0);
+        boolean exit = mainApp.confirm(MainApp.APP_NAME, "Exit", "Are you sure you want to exit?");
+        if (exit)
+            System.exit(0);
     }
 
     // ********** Setters **********
