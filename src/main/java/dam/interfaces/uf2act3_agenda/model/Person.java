@@ -2,12 +2,15 @@ package dam.interfaces.uf2act3_agenda.model;
 
 import java.time.LocalDate;
 
+import dam.interfaces.uf2act3_agenda.util.DateUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import jkutkut.dom.write.FieldXML;
+import jkutkut.dom.write.NodeXML;
 
 /**
  * Model class for a Person.
@@ -49,12 +52,25 @@ public class Person {
      */
     public Person(String firstName, String lastName, String street, int postalCode, String city,
                   int year, int month, int day) {
+        this(firstName, lastName, street, postalCode, city, LocalDate.of(year, month, day));
+    }
+
+    /**
+     * Constructor with attributes defined.
+     * @param firstName First name.
+     * @param lastName Last name.
+     * @param street Street address.
+     * @param postalCode Postal code.
+     * @param city City.
+     * @param birthday Birthday.
+     */
+    public Person(String firstName, String lastName, String street, int postalCode, String city, LocalDate birthday) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.street = new SimpleStringProperty(street);
         this.postalCode = new SimpleIntegerProperty(postalCode);
         this.city = new SimpleStringProperty(city);
-        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(year, month, day));
+        this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
     }
 
     // ********** GETTERS **********

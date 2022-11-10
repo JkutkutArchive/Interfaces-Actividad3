@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<people>
+    <person>
+        <firstName>Hans</firstName>
+        <lastName>Muster</lastName>
+        <street>Musterstrasse 1</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Ruth</firstName>
+        <lastName>Mueller</lastName>
+        <street>Musterstrasse 2</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Heinz</firstName>
+        <lastName>Kurz</lastName>
+        <street>Musterstrasse 3</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Cornelia</firstName>
+        <lastName>Meier</lastName>
+        <street>Musterstrasse 4</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Werner</firstName>
+        <lastName>Meyer</lastName>
+        <street>Musterstrasse 5</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Lydia</firstName>
+        <lastName>Kunz</lastName>
+        <street>Musterstrasse 6</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Anna</firstName>
+        <lastName>Best</lastName>
+        <street>Musterstrasse 7</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Stefan</firstName>
+        <lastName>Meier</lastName>
+        <street>Musterstrasse 8</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+    <person>
+        <firstName>Martin</firstName>
+        <lastName>Mueller</lastName>
+        <street>Musterstrasse 9</street>
+        <postalCode>12345</postalCode>
+        <city>Musterstadt</city>
+        <birthday>01/01/2000</birthday>
+    </person>
+</people>

@@ -1,0 +1,40 @@
+package dam.interfaces.uf2act3_agenda.javabeans;
+
+import dam.interfaces.uf2act3_agenda.model.Person;
+import javafx.collections.ObservableList;
+import jkutkut.dom.write.NodeXML;
+
+import java.util.ArrayList;
+
+public class PeopleXML implements NodeXML {
+    private ArrayList<PersonXML> lstPeople;
+
+    public PeopleXML(ObservableList<Person> people) {
+        this.lstPeople = new ArrayList<>(people.size());
+        for (Person person : people) {
+            this.lstPeople.add(new PersonXML(person));
+        }
+    }
+
+    public PeopleXML(ArrayList<PersonXML> people) {
+        this.lstPeople = people;
+    }
+
+    public ArrayList<PersonXML> getPeople() {
+        return lstPeople;
+    }
+
+    @Override
+    public String nodeName() {
+        return "people";
+    }
+
+    @Override
+    public Object[] nodeValues() {
+        Object[] people = new Object[this.lstPeople.size()];
+        for (int i = 0; i < people.length; i++) {
+            people[i] = this.lstPeople.get(i);
+        }
+        return people;
+    }
+}

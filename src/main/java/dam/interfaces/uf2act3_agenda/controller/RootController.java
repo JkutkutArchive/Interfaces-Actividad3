@@ -38,7 +38,7 @@ public class RootController {
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
-            mainApp.loadPeople(file.getAbsolutePath());
+            mainApp.loadPeople(file.getAbsolutePath(), true);
         }
     }
 
