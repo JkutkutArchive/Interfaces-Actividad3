@@ -5,6 +5,7 @@ import dam.interfaces.uf2act3_agenda.controller.RootController;
 import dam.interfaces.uf2act3_agenda.controller.UserMenuController;
 import dam.interfaces.uf2act3_agenda.model.Person;
 
+import dam.interfaces.uf2act3_agenda.util.XMLPersonParser;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,8 +19,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import jkutkut.exception.InvalidDataException;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.prefs.Preferences;
@@ -59,16 +60,7 @@ public class MainApp extends Application {
      */
     private void initComponents() {
         personData = FXCollections.observableArrayList();
-        // TODO DEBUG
-        personData.add(new Person("Hans", "Muster", "Musterstrasse 1", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Ruth", "Mueller", "Musterstrasse 2", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Heinz", "Kurz", "Musterstrasse 3", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Cornelia", "Meier", "Musterstrasse 4", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Werner", "Meyer", "Musterstrasse 5", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Lydia", "Kunz", "Musterstrasse 6", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Anna", "Best", "Musterstrasse 7", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Stefan", "Meier", "Musterstrasse 8", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Martin", "Mueller", "Musterstrasse 9", 12345, "Musterstadt", 2000, 1, 1));
+        loadPeople();
     }
 
     // ********** App Methods **********
@@ -128,6 +120,15 @@ public class MainApp extends Application {
     }
 
     // ********** UX Methods **********
+
+    private void setTitle(String title) {
+        if (primaryStage == null)
+            return;
+        if (title == null || title.isEmpty())
+            primaryStage.setTitle(APP_NAME);
+        else
+            primaryStage.setTitle(APP_NAME + " - " + title);
+    }
 
     /**
      * Opens a dialog window to edit (or create) a person.
@@ -226,48 +227,54 @@ public class MainApp extends Application {
     }
 
     // ********** Preferences **********
-    public File getPersonFilePath() {
+    public String getPersonFilePath() {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        String filePath = prefs.get("filePath", null);
-        if (filePath != null) {
-            return new File(filePath);
-        } else {
-            return null;
-        }
+        return prefs.get("filePath", null);
     }
 
-    public void setPersonFilePath(File file) { // TODO integrate with the logic
+    public void setPersonFilePath(String file) { // TODO integrate with the logic
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        if (file != null) {
-            prefs.put("filePath", file.getPath());
-            primaryStage.setTitle(String.format(
-                "%s - %s",
-                APP_NAME,
-                file.getName()
-            ));
-        } else {
+        if (file == null) {
             prefs.remove("filePath");
-            primaryStage.setTitle(APP_NAME);
+            setTitle(null);
+            return;
         }
+        String[] path = file.split("/");
+        String fileName = path[path.length - 1];
+        prefs.put("filePath", file);
+        setTitle(fileName);
     }
 
     // ********** File IO **********
-    public void loadPeople(File f) {
-        // TODO remove debug values from initcomponents
-        // TODO read file
-        // TODO open last session on init?
-        personData.add(new Person("Hans", "Muster", "Musterstrasse 1", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Ruth", "Mueller", "Musterstrasse 2", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Heinz", "Kurz", "Musterstrasse 3", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Cornelia", "Meier", "Musterstrasse 4", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Werner", "Meyer", "Musterstrasse 5", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Lydia", "Kunz", "Musterstrasse 6", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Anna", "Best", "Musterstrasse 7", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Stefan", "Meier", "Musterstrasse 8", 12345, "Musterstadt", 2000, 1, 1));
-        personData.add(new Person("Martin", "Mueller", "Musterstrasse 9", 12345, "Musterstadt", 2000, 1, 1));
+    public void loadPeople(String f, boolean confirmation) {
+        try {
+            XMLPersonParser.loadPeople(f, personData);
+            setPersonFilePath(f);
+            if (confirmation)
+                info("Success", "File loaded", "The file was loaded successfully.");
+        }
+        catch (InvalidDataException e) {
+            error("Error", "Could not load data", e.getMessage());
+            setPersonFilePath(null);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void savePeople(File f) {
-        // TODO write file
+    private void loadPeople() {
+        loadPeople(getPersonFilePath(), false);
+    }
+
+    public void savePeople(String f) {
+        try {
+            XMLPersonParser.savePeople(f, personData);
+
+            setPersonFilePath(f);
+            info("Success", "Data saved", "Data saved to " + f);
+        }
+        catch (Exception e) {
+            error("Error", "Could not save data", e.getMessage());
+        }
     }
 }

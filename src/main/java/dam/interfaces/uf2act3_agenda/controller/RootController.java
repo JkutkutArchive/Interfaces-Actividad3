@@ -38,15 +38,15 @@ public class RootController {
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
-            mainApp.loadPeople(file);
+            mainApp.loadPeople(file.getAbsolutePath());
         }
     }
 
     @FXML
     private void handleSave() {
-        File personFile = mainApp.getPersonFilePath();
-        if (personFile != null) {
-            mainApp.savePeople(personFile);
+        String personFileName = mainApp.getPersonFilePath();
+        if (personFileName != null) {
+            mainApp.savePeople(personFileName);
         } else {
             handleSaveAs();
         }
@@ -71,7 +71,7 @@ public class RootController {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.savePeople(file);
+            mainApp.savePeople(file.getAbsolutePath());
         }
     }
 
