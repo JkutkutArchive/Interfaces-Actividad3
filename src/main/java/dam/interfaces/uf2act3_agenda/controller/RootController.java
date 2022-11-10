@@ -77,13 +77,7 @@ public class RootController {
 
     @FXML
     private void handleAbout() {
-//        Dialogs.create()
-//                .title("AddressApp")
-//                .masthead("About")
-//                .message("Author: Marco Jakob\nWebsite: http://code.makery.ch")
-//                .showInformation();
-        mainApp.warn("AddressApp", "About", "Author: Jkutkut");
-        // TODO implement the dialog logic on MainApp
+        mainApp.info(MainApp.APP_NAME, "About", "Author: Jkutkut");
     }
 
     @FXML

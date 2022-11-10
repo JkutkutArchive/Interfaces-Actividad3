@@ -31,7 +31,7 @@ import java.util.prefs.Preferences;
  */
 public class MainApp extends Application {
     // ********** Constants **********
-    private static final String APP_NAME = "Contacts";
+    public static final String APP_NAME = "Contacts";
     private static final String LOGO = "file:src/main/resources/dam/interfaces/uf2act3_agenda/images/logo.png";
     private static final String APP_XML = "view/app.fxml";
     private static final String USER_MENU_XML = "view/userMenu.fxml";
@@ -189,6 +189,10 @@ public class MainApp extends Application {
         showAlert(primaryStage, type, title, header, content);
     }
 
+    public void info(String title, String header, String content) {
+        showAlert(Alert.AlertType.INFORMATION, title, header, content);
+    }
+
     /**
      * Show an error mesaage to the user.
      * @param title The title of the dialog.
@@ -236,10 +240,14 @@ public class MainApp extends Application {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
-            primaryStage.setTitle("AddressApp - " + file.getName());
+            primaryStage.setTitle(String.format(
+                "%s - %s",
+                APP_NAME,
+                file.getName()
+            ));
         } else {
             prefs.remove("filePath");
-            primaryStage.setTitle("AddressApp");
+            primaryStage.setTitle(APP_NAME);
         }
     }
 
