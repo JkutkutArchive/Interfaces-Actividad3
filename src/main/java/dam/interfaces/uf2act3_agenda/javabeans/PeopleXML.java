@@ -6,6 +6,11 @@ import jkutkut.dom.write.NodeXML;
 
 import java.util.ArrayList;
 
+/**
+ * JavaBean representing the People class in a XML file.
+ *
+ * @author jkutkut
+ */
 public class PeopleXML implements NodeXML {
     private final ArrayList<PersonXML> lstPeople;
 
@@ -16,10 +21,12 @@ public class PeopleXML implements NodeXML {
         }
     }
 
+    // ********** GETTERS **********
     public ArrayList<PersonXML> getPeople() {
         return lstPeople;
     }
 
+    // ********** NodeXML **********
     @Override
     public String nodeName() {
         return "people";

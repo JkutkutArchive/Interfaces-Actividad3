@@ -5,6 +5,11 @@ import dam.interfaces.uf2act3_agenda.util.DateUtil;
 import jkutkut.dom.write.FieldXML;
 import jkutkut.dom.write.NodeXML;
 
+/**
+ * JavaBean representing a list of Person objects in a XML file.
+ *
+ * @author jkutkut
+ */
 public class PersonXML implements NodeXML {
 
     private final String firstName;
@@ -23,10 +28,12 @@ public class PersonXML implements NodeXML {
         this.birthday = DateUtil.format(p.getBirthday());
     }
 
+    // ********** TOOLS **********
     public Person toPerson() {
         return new Person(firstName, lastName, street, postalCode, city, DateUtil.parse(birthday));
     }
 
+    // ********** NodeXML **********
     @Override
     public String nodeName() {
         return "person";
