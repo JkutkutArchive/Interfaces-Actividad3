@@ -11,7 +11,9 @@ module dam.interfaces.uf2act3_agenda {
     opens dam.interfaces.uf2act3_agenda.controller to javafx.fxml;
     exports dam.interfaces.uf2act3_agenda.controller;
 
-//    Xstream
+    // XStream
     opens dam.interfaces.uf2act3_agenda.javabeans to xstream;
     exports dam.interfaces.uf2act3_agenda.javabeans;
+
+    exports dam.interfaces.uf2act3_agenda.model;
 }

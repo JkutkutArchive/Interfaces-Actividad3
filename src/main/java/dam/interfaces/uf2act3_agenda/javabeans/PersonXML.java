@@ -27,7 +27,6 @@ public class PersonXML implements NodeXML {
         return new Person(firstName, lastName, street, postalCode, city, DateUtil.parse(birthday));
     }
 
-
     @Override
     public String nodeName() {
         return "person";

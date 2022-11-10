@@ -2,15 +2,12 @@ package dam.interfaces.uf2act3_agenda.model;
 
 import java.time.LocalDate;
 
-import dam.interfaces.uf2act3_agenda.util.DateUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import jkutkut.dom.write.FieldXML;
-import jkutkut.dom.write.NodeXML;
 
 /**
  * Model class for a Person.
@@ -35,7 +32,7 @@ public class Person {
         this.street = new SimpleStringProperty("");
         this.postalCode = new SimpleIntegerProperty(0);
         this.city = new SimpleStringProperty("");
-        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1970, 1, 1));
+        this.birthday = new SimpleObjectProperty<>(LocalDate.of(1970, 1, 1));
     }
 
     /**
@@ -70,7 +67,7 @@ public class Person {
         this.street = new SimpleStringProperty(street);
         this.postalCode = new SimpleIntegerProperty(postalCode);
         this.city = new SimpleStringProperty(city);
-        this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
+        this.birthday = new SimpleObjectProperty<>(birthday);
     }
 
     // ********** GETTERS **********

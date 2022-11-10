@@ -9,6 +9,7 @@ import dam.interfaces.uf2act3_agenda.util.XMLPersonParser;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -47,7 +48,6 @@ public class MainApp extends Application {
     // ********** UI **********
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private AnchorPane userMenu;
 
     public MainApp() {
         initComponents();
@@ -76,6 +76,10 @@ public class MainApp extends Application {
         stage.setTitle(APP_NAME);
         primaryStage.getIcons().add(new Image(LOGO));
         loadLayouts();
+        primaryStage.setOnCloseRequest(e -> {
+            e.consume();
+            exitApplication();
+        });
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
         stage.setScene(new Scene(rootLayout));
@@ -102,7 +106,7 @@ public class MainApp extends Application {
 
         // User menu
         FXMLLoader userMenuLoader = new FXMLLoader(MainApp.class.getResource(USER_MENU_XML));
-        userMenu = userMenuLoader.load();
+        AnchorPane userMenu = userMenuLoader.load();
         UserMenuController controller = userMenuLoader.getController();
         controller.setMainApp(this);
 
@@ -128,6 +132,13 @@ public class MainApp extends Application {
             primaryStage.setTitle(APP_NAME);
         else
             primaryStage.setTitle(APP_NAME + " - " + title);
+    }
+
+    @FXML
+    public void exitApplication() {
+        boolean exit = confirm(APP_NAME, "Exit", "Are you sure you want to exit?");
+        if (exit)
+            System.exit(0);
     }
 
     /**
@@ -195,7 +206,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Show an error mesaage to the user.
+     * Show an error message to the user.
      * @param title The title of the dialog.
      * @param header The header of the dialog.
      * @param msg The content of the dialog.
@@ -205,7 +216,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Show an information mesaage to the user.
+     * Show an information message to the user.
      * @param title The title of the dialog.
      * @param header The header of the dialog.
      * @param msg The content of the dialog.
@@ -232,7 +243,7 @@ public class MainApp extends Application {
         return prefs.get("filePath", null);
     }
 
-    public void setPersonFilePath(String file) { // TODO integrate with the logic
+    public void setPersonFilePath(String file) {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file == null) {
             prefs.remove("filePath");

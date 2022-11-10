@@ -4,8 +4,6 @@ import java.io.File;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 
-// import org.controlsfx.dialog.Dialogs; // TODO
-
 import dam.interfaces.uf2act3_agenda.MainApp;
 
 /**
@@ -82,9 +80,7 @@ public class RootController {
 
     @FXML
     private void handleExit() {
-        boolean exit = mainApp.confirm(MainApp.APP_NAME, "Exit", "Are you sure you want to exit?");
-        if (exit)
-            System.exit(0);
+        mainApp.exitApplication();
     }
 
     // ********** Setters **********

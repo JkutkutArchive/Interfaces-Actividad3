@@ -83,19 +83,19 @@ public class PersonPolicy {
     /**
      * Tests if the values of a person is valid.
      *
-     * @param fname First name.
-     * @param lname Last name.
+     * @param firstName First name.
+     * @param lastName Last name.
      * @param street Street address.
      * @param city City address.
      * @param sPostalCode Postal code address.
      * @param birthday Birthday with format dd/mm/yyyy.
      * @return A string with all the error found, one per line.
      */
-    public String test(String fname, String lname, String street, String city, String sPostalCode, String birthday) {
+    public String test(String firstName, String lastName, String street, String city, String sPostalCode, String birthday) {
         ArrayList<String> errors = new ArrayList<>();
 
-        errors.add(namePolicy.testAll(fname));
-        errors.add(lastNamePolicy.testAll(lname));
+        errors.add(namePolicy.testAll(firstName));
+        errors.add(lastNamePolicy.testAll(lastName));
         try {
             int postalCode = Integer.parseInt(sPostalCode);
             if (postalCode < 10000) {

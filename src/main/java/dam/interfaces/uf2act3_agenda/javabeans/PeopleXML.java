@@ -7,17 +7,13 @@ import jkutkut.dom.write.NodeXML;
 import java.util.ArrayList;
 
 public class PeopleXML implements NodeXML {
-    private ArrayList<PersonXML> lstPeople;
+    private final ArrayList<PersonXML> lstPeople;
 
     public PeopleXML(ObservableList<Person> people) {
         this.lstPeople = new ArrayList<>(people.size());
         for (Person person : people) {
             this.lstPeople.add(new PersonXML(person));
         }
-    }
-
-    public PeopleXML(ArrayList<PersonXML> people) {
-        this.lstPeople = people;
     }
 
     public ArrayList<PersonXML> getPeople() {
